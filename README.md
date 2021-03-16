@@ -1,1 +1,1 @@
-# College-bash-scripts
+# College-OS-Lab
