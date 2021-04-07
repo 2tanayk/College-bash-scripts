@@ -1,0 +1,1061 @@
+Explore the internal commands of linux like
+1. ls
+2. mkdir
+3. chdir
+4. rmdir
+5. cat
+6. rm
+7. mv
+8. cp
+9. head 
+10. tail
+11. sort
+12. wc
+13. chown
+14. chmod
+15. chgrp
+16. umask
+17. ps
+18. pipe
+19. Redirection operators
+20. Explore commands for following:
+a. Display top 10 processes in descending order,b. Display the process with highest memory usage,
+c. Display current user logged in and logname,
+d. Display current shell, home directory, operating system type, 
+current path setting, current working directory,
+e. Display OS version, release number, kernel version. 
+Theory:
+1. Ls:
+ls is a Linux shell command that lists directory contents of files and 
+directories.
+1. ls -t :
+It sorts the file by modification time, showing the last edited file first. 
+head -1 picks up this first file. To open the last edited file in the 
+current directory use the combination of ls and head commands as 
+shown below.
+2. ls -1:
+This command displays one command per line.
+3. ls -l :
+To show long listing information about the file/directory.
+Output:
+ubuntu@ubuntu:~$ ls
+Desktop Documents Downloads Music Pictures Public Templates 
+Videos
+ubuntu@ubuntu:~$ ls-t
+ls-t: command not found
+ubuntu@ubuntu:~$ ls -t
+Downloads Documents Music Pictures Public Templates Videos 
+Desktop
+ubuntu@ubuntu:~$ ls -1
+Desktop
+Documents
+Downloads
+Music
+Pictures
+Public
+Templates
+Videosubuntu@ubuntu:~$ ls -l
+total 0
+drwxr-xr-x 2 ubuntu ubuntu 60 Feb 24 14:02 Desktop
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Documents
+drwxr-xr-x 2 ubuntu ubuntu 80 Feb 24 14:15 Downloads
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Music
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Pictures
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Public
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Templates
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Videos
+2. mkdir:
+mkdir command in Linux allows the user to create directories. This 
+command can create multiple directories at once as well as set the 
+permissions for the directories.
+1. mkdir -v:
+It displays a message for every directory created.
+2. mkdir -p:
+A flag which enables the command to create parent directories as 
+necessary. If the directories exist, no error is specified.
+3. mkdir -m:
+This option is used to set the file modes, i.e. permissions, etc. for the 
+created directories.
+Output:
+ubuntu@ubuntu:~$ cd Desktop/
+ubuntu@ubuntu:~/Desktop$ mkdir OS
+ubuntu@ubuntu:~/Desktop$ mkdir -v temp
+mkdir: created directory 'temp'
+ubuntu@ubuntu:~/Desktop$ mkdir temp
+mkdir: cannot create directory ‘temp’: File exists
+ubuntu@ubuntu:~/Desktop$ mkdir -p temp
+ubuntu@ubuntu:~/Desktop$ ls
+OS temp ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ mkdir -m a=rwx win3. chdir:
+The chdir command is a system function (system call) which is used to 
+change the current working directory. On some systems, this command is 
+used as an alias for the shell command cd. chdir changes the current working 
+directory of the calling process to the directory specified in path.
+4. rmdir:
+rmdir command is used remove empty directories from the filesystem in 
+Linux. The rmdir command removes each and every directory specified in the 
+command line only if these directories are empty. So if the specified directory 
+has some directories or files in it then this cannot be removed by rmdir 
+command.
+1. rmdir -p:
+In this option each of the directory argument is treated as a pathname 
+of which all components will be removed, if they are already empty, 
+starting from the last component.
+2. rmdir -v:
+This option displays verbose information for every directory being 
+processed.
+3. rmdir –version:
+ This option is used to display the version information and exit.
+Output:
+ubuntu@ubuntu:~/Desktop$ ls
+OS temp ubiquity.desktop win
+ubuntu@ubuntu:~/Desktop$ rmdir win
+ubuntu@ubuntu:~/Desktop$ rmdir -p OS
+rmdir: failed to remove 'OS': Directory not empty
+ubuntu@ubuntu:~/Desktop$ ls
+OS temp ubiquity.desktopubuntu@ubuntu:~/Desktop$ rmdir -p temp
+ubuntu@ubuntu:~/Desktop$ ls
+OS ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ rmdir -v OS
+rmdir: removing directory, 'OS'
+rmdir: failed to remove 'OS': Directory not empty
+ 
+5. cat:
+Cat(concatenate) command is very frequently used in Linux. It reads data 
+from the file and gives their content as output. It helps us to create, view, 
+concatenate files.
+1. cat -n:
+ To view contents of a file preceding with line numbers.
+2. cat [filename-whose-contents-is-to-be-copied] > [destination-filename]:
+ Copy the contents of one file to another file.
+3. cat file1 >> file2:
+ Append the contents of one file to the end of another file.
+Output:
+ubuntu@ubuntu:~/Desktop$ cat >> a.txt
+e2bdj3db
+2d3rjbhb
+fv3hd v3r
+^Z
+[1]+ Stopped cat >> a.txt
+ubuntu@ubuntu:~/Desktop$ cat -n a.txt 
+ 1 e2bdj3db
+ 2 2d3rjbhb 3 fv3hd v3r
+ubuntu@ubuntu:~/Desktop$ touch b.txt
+ubuntu@ubuntu:~/Desktop$ cat a.txt > b.txt
+ubuntu@ubuntu:~/Desktop$ cat b.txt
+e2bdj3db
+2d3rjbhb
+fv3hd v3r
+ubuntu@ubuntu:~/Desktop$ cat a.txt>>b.txt
+ubuntu@ubuntu:~/Desktop$ cat b.txt
+e2bdj3db
+2d3rjbhb
+fv3hd v3r
+e2bdj3db
+2d3rjbhb
+fv3hd v3r
+6. rm:
+rm stands for remove here. rm command is used to remove objects such as files, 
+directories, symbolic links and so on from the file system like UNIX. To be 
+more precise, rm removes references to objects from the filesystem, where those 
+objects might have had multiple references (for example, a file with two 
+different names).
+1. rm -i:
+Like in cp, the -i option makes the command ask the user for 
+confirmation before removing each file, you have to press y for confirm 
+deletion, any other key leaves the file un-deleted.
+2. rm -rf: 
+With -rf option rm command performs a tree-walk and will delete all the 
+files and sub-directories recursively of the parent directory. At each stage 
+it deletes everything it finds. Normally, rm wouldn’t delete the directories 
+but when used with this option, it will delete.3. rm --version: This option is used to display the version of rm which is 
+currently running on your system.
+Output:
+ubuntu@ubuntu:~/Desktop$ ls
+a.txt b.txt OS ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ rm a.txt 
+ubuntu@ubuntu:~/Desktop$ rm -i b.txt
+rm: remove regular file 'b.txt'? y
+ubuntu@ubuntu:~/Desktop$ rm -rf OS
+ubuntu@ubuntu:~/Desktop$ ls
+ubiquity.desktop
+7. mv:
+mv stands for move. mv is used to move one or more files or directories from 
+one place to another in file system like UNIX. It has two distinct functions:
+(i) It rename a file or folder.
+(ii) It moves group of files to different directory.
+No additional space is consumed on a disk during renaming. This command 
+normally works silently means no prompt for confirmation.
+1. mv -i (Interactive):
+Like in cp, the -i option makes the command ask the user for 
+confirmation before moving a file that would overwrite an existing file, 
+you have to press y for confirm moving, any other key leaves the file as it 
+is. This option doesn’t work if the file doesn’t exist, it simply rename it or 
+move it to new location.2. mv -f (Force):mv prompts for confirmation overwriting the destination 
+file if a file is write protected. The -f option overrides this minor 
+protection and overwrite the destination file forcefully and delete the 
+source file.
+3. mv -b(backup): 
+With this option it is easier to take a backup of an existing file that will be 
+overwritten as a result of the mv command. This will create a backup file 
+with the tilde character(~) appended to it.
+ubuntu@ubuntu:~/Desktop$ mv a.txt nano.txt
+ubuntu@ubuntu:~/Desktop$ ls
+b.txt nano.txt ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ mv nano.txt b.txt
+ubuntu@ubuntu:~/Desktop$ ls
+b.txt ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ cat b.txt
+bd2ed
+2effbejbw
+2ecwhbw
+ubuntu@ubuntu:~/Desktop$ touch d.txt
+ubuntu@ubuntu:~/Desktop$ mv -i d.txt b.txt
+mv: overwrite 'b.txt'? y
+ubuntu@ubuntu:~/Desktop$ ls
+b.txt ubiquity.desktop
+8. cp:
+cp stands for copy. This command is used to copy files or group of files or 
+directory. It creates an exact image of a file on a disk with different file name. 
+cp command require at least two filenames in its arguments.1. cp -i(interactive):
+i stands for Interactive copying. With this option system first warns the 
+user before overwriting the destination file. cp prompts for a response, if 
+you press y then it overwrites the file and with any other option leave it 
+uncopied.
+2. cp -b(backup): 
+With this option cp command creates the backup of the destination file in 
+the same folder with the different name and in different format.
+3. cp -p(preserve): 
+With -p option cp preserves the following characteristics of each source 
+file in the corresponding destination file: the time of the last data 
+modification and the time of the last access, the ownership (only if it has 
+permissions to do this), and the file permission-bits.
+Output:
+ubuntu@ubuntu:~/Desktop$ ls
+b.txt ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ touch n.txt
+ubuntu@ubuntu:~/Desktop$ cp b.txt n.txt
+ubuntu@ubuntu:~/Desktop$ ls
+b.txt n.txt ubiquity.desktop
+ubuntu@ubuntu:~/Desktop$ cat b
+cat: b: No such file or directoryubuntu@ubuntu:~/Desktop$ cat b.txt
+9. head:
+The head command, as the name implies, print the top N number of data of the 
+given input. By default, it prints the first 10 lines of the specified files. If more 
+than one file name is provided then data from each file is preceded by its file 
+name.
+1. head -n num: 
+Prints the first ‘num’ lines instead of first 10 lines. num is mandatory to 
+be specified in command otherwise it displays an error.
+2. head -c num: 
+Prints the first ‘num’ bytes from the file specified. Newline count as a 
+single character, so if head prints out a newline, it will count it as a byte. 
+num is mandatory to be specified in command otherwise displays an 
+error.
+3. head -c num: 
+Prints the first ‘num’ bytes from the file specified. Newline count as a 
+single character, so if head prints out a newline, it will count it as a byte. 
+num is mandatory to be specified in command otherwise displays an 
+error.
+Output:
+ubuntu@ubuntu:~/Desktop$ head -n 3 b.txt 
+s2eded2edwekd
+d wjendedne
+e md wnd wm
+ubuntu@ubuntu:~/Desktop$ head -n 2 b.txt 
+s2eded2edwekd
+d wjendedne
+ubuntu@ubuntu:~/Desktop$ head -c 1 b.txt 10. tail:
+he tail command, as the name implies, print the last N number of data of the 
+given input. By default it prints the last 10 lines of the specified files. If more 
+than one file name is provided then data from each file is precedes by its file 
+name.
+1. tail -n num:
+Prints the last ‘num’ lines instead of last 10 lines. num is mandatory to be 
+specified in command otherwise it displays an error. This command can 
+also be written as without symbolizing ‘n’ character but ‘-‘ sign is 
+mandatory.
+2. tail -c num: 
+Prints the last ‘num’ bytes from the file specified. Newline count as a 
+single character, so if tail prints out a newline, it will count it as a byte. In 
+this option it is mandatory to write -c followed by positive or negative 
+num depends upon the requirement. By +num, it display all the data after 
+skipping num bytes from starting of the specified file and by -num, it 
+display the last num bytes from the file specified.
+3. tail -f: 
+This option is mainly used by system administration to monitor the 
+growth of the log files written by many Unix program as they are 
+running. This option shows the last ten lines of a file and will update 
+when new lines are added.
+Output:
+ubuntu@ubuntu:~/Desktop$ tail -n 1 b.txt de de e 
+ubuntu@ubuntu:~/Desktop$ tail -c 2 b.txt 
+ubuntu@ubuntu:~/Desktop$ tail -f b.txt 
+s2eded2edwekd
+d wjendedne
+e md wnd wm
+de de e 
+11. sort:
+SORT command is used to sort a file, arranging the records in a particular order. 
+By default, the sort command sorts file assuming the contents are ASCII. Using 
+options in sort command, it can also be used to sort numerically.
+1. sort -r Option: 
+Sorting In Reverse Order : You can perform a reverse-order sort using the 
+-r flag. the -r flag is an option of the sort command which sorts the input 
+file in reverse order i.e. descending order by default.
+2. sort -n Option : 
+To sort a file numerically used –n option. -n option is also predefined in 
+unix as the above options are. This option is used to sort the file with 
+numeric data present inside.2. sort -nr option : 
+To sort a file with numeric data in reverse order we can use the 
+combination of two options as stated below.
+3. sort -c option : 
+This option is used to check if the file given is already sorted or not & 
+checks if a file is already sorted pass the -c option to sort. This will write 
+to standard output if there are lines that are out of order. The sort tool can 
+be used to understand if this file is sorted and which lines are out of order.
+Output:
+ ubuntu@ubuntu:~/Desktop$ sort b.txt 
+de de e 
+d wjendedne
+e md wnd wm
+s2eded2edwekd
+ubuntu@ubuntu:~/Desktop$ sort -r b.txt 
+s2eded2edwekd
+e md wnd wm
+d wjendedne
+de de e 
+ubuntu@ubuntu:~/Desktop$ sort -n n.txt 
+-100
+0
+23
+45
+67100
+123
+ubuntu@ubuntu:~/Desktop$ sort -nr n.txt 
+123
+100
+67
+45
+23
+0
+-100
+ubuntu@ubuntu:~/Desktop$ sort -c n.txt 
+sort: n.txt:5: disorder: 100
+12. wc:
+wc stands for word count. As the name implies, it is mainly used for counting 
+purpose. It is used to find out number of lines, word count, byte and characters 
+count in the files specified in the file arguments. By default it displays fourcolumnar output. First column shows number of lines present in a file specified, 
+second column shows number of words present in the file, third column shows 
+number of characters present in file and fourth column itself is the file name 
+which are given as argument.
+1. wc -l: 
+This option prints the number of lines present in a file. With this option 
+wc command displays two-columnar output, 1st column shows number of 
+lines present in a file and 2nd itself represent the file name.2. wc -w: 
+This option prints the number of words present in a file. With this option 
+wc command displays two-columnar output, 1st column shows number of 
+words present in a file and 2nd is the file name.
+3. wc -c: 
+This option displays count of bytes present in a file. With this option it 
+displays two-columnar output, 1st column shows number of bytes present 
+in a file and 2nd is the file name.
+Output:
+ubuntu@ubuntu:~/Desktop$ wc b.txt 
+4 10 47 b.txt
+ubuntu@ubuntu:~/Desktop$ wc -l b.txt 
+4 b.txt
+ubuntu@ubuntu:~/Desktop$ wc -w b.txt 
+10 b.txt
+ubuntu@ubuntu:~/Desktop$ wc -c b.txt 
+47 b.txt
+13. chown:
+chown command is used to change the file Owner or group. Whenever you want 
+to change ownership you can use chown command.
+1. chown -c: 
+Reports when a file change is made.2. chown -v: It is used to show the verbose information for every file 
+processed.
+3. chown -f: 
+It supresses most of the error messages. When you are not permitted to 
+change group permissions and shows error, this option forcefully/silently 
+changes the ownership.
+Output:
+ ubuntu@ubuntu:~/Desktop$ chown ubuntu n.txt 
+ubuntu@ubuntu:~/Desktop$ ls -l n.txt 
+-rw-rw-r-- 1 ubuntu ubuntu 25 Feb 24 14:52 n.txt
+ubuntu@ubuntu:~/Desktop$ ls -l b.txt 
+-rw-rw-r-- 1 ubuntu ubuntu 47 Feb 24 14:51 b.txt
+ubuntu@ubuntu:~/Desktop$ chown -c ubuntu b.txt 
+ubuntu@ubuntu:~/Desktop$ chown -v ubuntu n.txt 
+ownership of 'n.txt' retained as ubuntu
+ubuntu@ubuntu:~/Desktop$ sudo chown -f n
+news nm-openvpn nobody 
+ubuntu@ubuntu:~/Desktop$ sudo chown -f root n.txt 
+14. chmod:
+The chmod command is used to change the access mode of a file.
+The name is an abbreviation of change mode.1. chmod -c:
+Reports only if any changes are made with this command.
+2 chmod -v:
+Verbose mode. It gives a diagnostic for every file process
+3. chmod -f:
+This option supresses the error messages if any.
+Output:
+ubuntu@ubuntu:~/Desktop$ chmod u=rwx n.txt 
+chmod: changing permissions of 'n.txt': Operation not permitted
+ubuntu@ubuntu:~/Desktop$ chmod u=rwx b.txt 
+ubuntu@ubuntu:~/Desktop$ ls -l b.txt 
+-rwxrw-r-- 1 ubuntu ubuntu 47 Feb 24 14:51 b.txt
+ubuntu@ubuntu:~/Desktop$ ls -l n.txt 
+-rw-rw-r-- 1 root ubuntu 25 Feb 24 14:52 n.txt
+ubuntu@ubuntu:~/Desktop$ chmod -c 
+chmod: missing operand
+Try 'chmod --help' for more information.
+ubuntu@ubuntu:~/Desktop$ chmod -c u=r n.txt 
+chmod: changing permissions of 'n.txt': Operation not permitted
+ubuntu@ubuntu:~/Desktop$ chmod -c u=r b.txt 
+mode of 'b.txt' changed from 0764 (rwxrw-r--) to 0464 (r--rw-r--)
+ubuntu@ubuntu:~/Desktop$ chmod -v u=rw b.txt 
+mode of 'b.txt' changed from 0464 (r--rw-r--) to 0664 (rw-rw-r--)
+ubuntu@ubuntu:~/Desktop$ chmod -f u=rw n.txt 
+15. chgrp:chgrp command in Linux is used to change the group ownership of a file or 
+directory. All files in Linux belong to an owner and a group.
+1. chgrp -c or –changes : 
+To describe the action for each File whose group actually changes.
+2. chgrp -f : 
+To suppress error messages.
+3. chgrp -v : 
+To describe the action or non-action taken for every File.
+16. umask:
+umask command in linux is used to set the default permissions for files and 
+directories. Every time you create a new file/directory certain permission are 
+assigned to it by the system on its own. If you don’t like these default 
+permissions then we can use umask command to change them.
+1. umask -S: 
+Makes the output symbolic; otherwise an octal number is output.
+Output:
+ubuntu@ubuntu:~/Desktop$ umask n.txt 
+bash: umask: `n': invalid symbolic mode operator
+ubuntu@ubuntu:~/Desktop$ umask n.txt 111
+bash: umask: `n': invalid symbolic mode operatorubuntu@ubuntu:~/Desktop$ ls -l n.txt 
+-rw-rw-r-- 1 root ubuntu 25 Feb 24 14:52 n.txt
+ubuntu@ubuntu:~/Desktop$ umask -S
+u=rwx,g=rwx,o=rx
+17. ps:
+Linux provides us a utility called ps for viewing information related with the 
+processes on a system which stands as abbreviation for “Process Status”. ps 
+command is used to list the currently running processes and their PIDs along 
+with some other information depends on different options.
+1. ps -e:
+View all the running processes.
+2. ps -d:
+View all the processes except session leaders.
+3. ps -r:
+View all the running processes.
+Output:
+ubuntu@ubuntu:~$ ps
+ PID TTY TIME CMD
+ 5399 pts/0 00:00:00 bash
+ 8563 pts/0 00:00:00 cat
+ 10328 pts/0 00:00:00 ps
+ubuntu@ubuntu:~$ ps -e PID TTY TIME CMD
+ 1 ? 00:00:11 systemd
+ 2 ? 00:00:00 kthreadd
+ 3 ? 00:00:00 rcu_gp
+ 4 ? 00:00:00 rcu_par_gp
+ 6 ? 00:00:00 kworker/0:0H-kblockd
+ 9 ? 00:00:00 mm_percpu_wq
+ 10 ? 00:00:00 ksoftirqd/0
+ 11 ? 00:00:03 rcu_sched
+ 12 ? 00:00:00 migration/0
+ 13 ? 00:00:00 idle_inject/0
+ 14 ? 00:00:00 cpuhp/0
+ 15 ? 00:00:00 cpuhp/1
+ 16 ? 00:00:00 idle_inject/1
+ 17 ? 00:00:01 migration/1
+ 18 ? 00:00:00 ksoftirqd/1
+ 20 ? 00:00:00 kworker/1:0H-kblockd
+ 21 ? 00:00:00 cpuhp/2
+ 22 ? 00:00:00 idle_inject/2
+ 23 ? 00:00:01 migration/2
+ 24 ? 00:00:00 ksoftirqd/2
+ 26 ? 00:00:00 kworker/2:0H-kblockd
+ 27 ? 00:00:00 cpuhp/3
+ 28 ? 00:00:00 idle_inject/3
+ 29 ? 00:00:01 migration/3
+ 30 ? 00:00:00 ksoftirqd/3
+ 32 ? 00:00:00 kworker/3:0H-kblockd 33 ? 00:00:00 cpuhp/4
+ 34 ? 00:00:00 idle_inject/4
+ 35 ? 00:00:01 migration/4
+ 36 ? 00:00:00 ksoftirqd/4
+ 38 ? 00:00:00 kworker/4:0H-events_highpri
+ 39 ? 00:00:00 cpuhp/5
+ 40 ? 00:00:00 idle_inject/5
+ 41 ? 00:00:01 migration/5
+ 42 ? 00:00:00 ksoftirqd/5
+ 44 ? 00:00:00 kworker/5:0H-events_highpri
+ 45 ? 00:00:00 cpuhp/6
+ 46 ? 00:00:00 idle_inject/6
+ 47 ? 00:00:01 migration/6
+ 48 ? 00:00:00 ksoftirqd/6
+ 50 ? 00:00:00 kworker/6:0H-events_highpri
+ 51 ? 00:00:00 cpuhp/7
+ 52 ? 00:00:00 idle_inject/7
+ 53 ? 00:00:01 migration/7
+ 54 ? 00:00:00 ksoftirqd/7
+ 56 ? 00:00:00 kworker/7:0H-events_highpri
+ 57 ? 00:00:00 kdevtmpfs
+ 58 ? 00:00:00 netns
+ 59 ? 00:00:00 rcu_tasks_kthre
+ 60 ? 00:00:00 kauditd
+ 63 ? 00:00:00 khungtaskd
+ 64 ? 00:00:00 oom_reaper
+ 65 ? 00:00:00 writeback 66 ? 00:00:00 kcompactd0
+ 67 ? 00:00:00 ksmd
+ 68 ? 00:00:00 khugepaged
+ 163 ? 00:00:00 kintegrityd
+ 164 ? 00:00:00 kblockd
+ 165 ? 00:00:00 blkcg_punt_bio
+ 166 ? 00:00:00 tpm_dev_wq
+ 167 ? 00:00:00 ata_sff
+ 168 ? 00:00:00 md
+ 169 ? 00:00:00 edac-poller
+ 170 ? 00:00:00 devfreq_wq
+ 171 ? 00:00:00 watchdogd
+ 176 ? 00:00:00 kswapd0
+ 177 ? 00:00:00 ecryptfs-kthrea
+ 180 ? 00:00:00 kthrotld
+ 181 ? 00:00:00 irq/123-aerdrv
+ 182 ? 00:00:00 irq/123-pcie-dp
+ 183 ? 00:00:00 irq/124-aerdrv
+ 184 ? 00:00:00 irq/124-pcie-dp
+ 185 ? 00:00:00 acpi_thermal_pm
+ 187 ? 00:00:00 vfio-irqfd-clea
+ 189 ? 00:00:00 kworker/2:2-events
+ 192 ? 00:00:00 ipv6_addrconf
+ 203 ? 00:00:00 kstrp
+ 207 ? 00:00:00 kworker/u17:0-rb_allocator
+ 226 ? 00:00:00 charger_manager
+ 284 ? 00:00:00 nvme-wq 285 ? 00:00:00 nvme-reset-wq
+ 286 ? 00:00:00 nvme-delete-wq
+ 287 ? 00:00:00 scsi_eh_0
+ 288 ? 00:00:00 scsi_tmf_0
+ 289 ? 00:00:00 cryptd
+ 290 ? 00:00:00 scsi_eh_1
+ 291 ? 00:00:00 scsi_tmf_1
+ 292 ? 00:00:00 scsi_eh_2
+ 297 ? 00:00:00 scsi_tmf_2
+ 302 ? 00:00:00 scsi_eh_3
+ 303 ? 00:00:00 scsi_tmf_3
+ 304 ? 00:00:00 scsi_eh_4
+ 305 ? 00:00:00 scsi_tmf_4
+ 306 ? 00:00:00 scsi_eh_5
+ 307 ? 00:00:00 scsi_tmf_5
+ 312 ? 00:00:00 scsi_eh_6
+ 314 ? 00:00:00 scsi_tmf_6
+ 316 ? 00:00:00 scsi_eh_7
+ 317 ? 00:00:00 scsi_tmf_7
+ 319 ? 00:00:00 scsi_eh_8
+ 321 ? 00:00:00 scsi_tmf_8
+ 322 ? 00:00:00 scsi_eh_9
+ 323 ? 00:00:00 scsi_tmf_9
+ 324 ? 00:00:00 scsi_eh_10
+ 331 ? 00:00:00 scsi_tmf_10
+ 332 ? 00:00:00 scsi_eh_11
+ 333 ? 00:00:00 scsi_tmf_11 334 ? 00:00:00 scsi_eh_12
+ 335 ? 00:00:00 scsi_tmf_12
+ 336 ? 00:00:00 scsi_eh_13
+ 337 ? 00:00:00 scsi_tmf_13
+ 338 ? 00:00:00 scsi_eh_14
+ 339 ? 00:00:00 scsi_tmf_14
+ 340 ? 00:00:00 scsi_eh_15
+ 341 ? 00:00:00 scsi_tmf_15
+ 379 ? 00:00:00 nvkm-disp
+ 381 ? 00:00:00 kworker/7:1H
+ 383 ? 00:00:00 irq/109-SYNA7DB
+ 384 ? 00:00:00 ttm_swap
+ 385 ? 00:00:00 scsi_eh_16
+ 386 ? 00:00:00 scsi_tmf_16
+ 387 ? 00:00:04 usb-storage
+ 389 ? 00:00:00 uas
+ 396 ? 00:00:00 kworker/5:1H-events_highpri
+ 404 ? 00:00:00 kworker/4:1H-events_highpri
+ 418 ? 00:00:00 kworker/6:1H-events_highpri
+ 496 ? 00:00:00 kworker/1:1H-events_highpri
+ 607 ? 00:00:00 kworker/0:1H-events_highpri
+ 624 ? 00:00:00 kworker/3:1H-events_highpri
+ 627 ? 00:00:00 kworker/2:1H-kblockd
+ 658 ? 00:00:01 loop0
+ 1261 ? 00:00:00 systemd-journal
+ 1286 ? 00:00:01 systemd-udevd
+ 1335 ? 00:00:00 irq/138-mei_me 1353 ? 00:00:00 cfg80211
+ 1363 ? 00:00:01 irq/139-iwlwifi
+ 1365 ? 00:00:00 irq/140-iwlwifi
+ 1366 ? 00:00:00 irq/141-iwlwifi
+ 1367 ? 00:00:00 irq/142-iwlwifi
+ 1368 ? 00:00:00 irq/143-iwlwifi
+ 1369 ? 00:00:00 irq/144-iwlwifi
+ 1370 ? 00:00:00 irq/145-iwlwifi
+ 1371 ? 00:00:00 irq/146-iwlwifi
+ 1372 ? 00:00:00 irq/147-iwlwifi
+ 1373 ? 00:00:00 irq/148-iwlwifi
+ 1404 ? 00:00:00 kmemstick
+ 1412 ? 00:00:00 kworker/u17:3-rb_allocator
+ 1459 ? 00:00:00 irq/149-AudioHD
+ 1460 ? 00:00:00 irq/149-AudioDS
+ 1491 ? 00:00:00 spl_system_task
+ 1492 ? 00:00:00 spl_delay_taskq
+ 1493 ? 00:00:00 spl_dynamic_tas
+ 1494 ? 00:00:00 spl_kmem_cache
+ 1495 ? 00:00:00 zvol
+ 1496 ? 00:00:00 arc_prune
+ 1497 ? 00:00:00 zthr_procedure
+ 1498 ? 00:00:00 zthr_procedure
+ 1499 ? 00:00:00 dbu_evict
+ 1500 ? 00:00:00 dbuf_evict
+ 1501 ? 00:00:00 z_vdev_file
+ 1502 ? 00:00:00 l2arc_feed 1521 ? 00:00:00 systemd-resolve
+ 1522 ? 00:00:00 systemd-timesyn
+ 1526 ? 00:00:00 accounts-daemon
+ 1527 ? 00:00:00 acpid
+ 1529 ? 00:00:00 avahi-daemon
+ 1530 ? 00:00:00 bluetoothd
+ 1531 ? 00:00:00 cron
+ 1532 ? 00:00:00 cupsd
+ 1533 ? 00:00:04 dbus-daemon
+ 1537 ? 00:00:10 NetworkManager
+ 1544 ? 00:00:00 irqbalance
+ 1546 ? 00:00:00 networkd-dispat
+ 1548 ? 00:00:00 polkitd
+ 1550 ? 00:00:00 rsyslogd
+ 1559 ? 00:00:00 switcheroo-cont
+ 1567 ? 00:00:00 systemd-logind
+ 1573 ? 00:00:00 thermald
+ 1578 ? 00:00:00 udisksd
+ 1579 ? 00:00:01 wpa_supplicant
+ 1581 ? 00:00:00 zed
+ 1588 ? 00:00:00 avahi-daemon
+ 1632 ? 00:00:00 cups-browsed
+ 1642 ? 00:00:00 ModemManager
+ 1664 ? 00:00:00 unattended-upgr
+ 1771 ? 00:00:00 systemd
+ 1772 ? 00:00:00 (sd-pam)
+ 1780 ? 00:00:00 tracker-miner-f 1786 ? 00:00:00 dbus-daemon
+ 1792 ? 00:00:00 dconf-service
+ 1813 ? 00:00:00 gvfsd
+ 1833 ? 00:00:00 gvfsd-fuse
+ 1836 ? 00:00:00 rtkit-daemon
+ 1848 ? 00:00:00 gvfs-udisks2-vo
+ 1862 ? 00:00:00 gvfs-mtp-volume
+ 1867 ? 00:00:00 gvfs-gphoto2-vo
+ 1871 ? 00:00:00 gvfs-goa-volume
+ 1878 ? 00:00:00 goa-daemon
+ 1926 ? 00:00:00 at-spi-bus-laun
+ 1931 ? 00:00:00 dbus-daemon
+ 1945 ? 00:00:00 upowerd
+ 1973 ? 00:00:00 goa-identity-se
+ 1979 ? 00:00:00 gvfs-afc-volume
+ 1996 ? 00:00:00 krfcommd
+ 2064 ? 00:00:00 whoopsie
+ 2067 ? 00:00:00 kerneloops
+ 2070 ? 00:00:00 kerneloops
+ 2096 ? 00:00:00 xdg-permission-
+ 2131 ? 00:00:00 xdg-desktop-por
+ 2138 ? 00:00:00 xdg-document-po
+ 2273 ? 00:00:00 gnome-keyring-d
+ 2691 ? 00:00:00 loop1
+ 4744 ? 00:00:00 gdm3
+ 4748 ? 00:00:00 gdm-session-wor
+ 4754 tty2 00:00:00 gdm-x-session 4756 tty2 00:04:40 Xorg
+ 4777 tty2 00:00:00 gnome-session-b
+ 4849 ? 00:00:00 ssh-agent
+ 4866 ? 00:00:15 ibus-daemon
+ 4870 ? 00:00:00 ibus-dconf
+ 4871 ? 00:00:00 ibus-ui-gtk3
+ 4874 ? 00:00:03 ibus-extension-
+ 4876 ? 00:00:00 ibus-x11
+ 4880 ? 00:00:00 ibus-portal
+ 4906 ? 00:00:02 at-spi2-registr
+ 4922 ? 00:00:00 gnome-session-c
+ 4923 ? 00:00:57 pulseaudio
+ 4936 ? 00:00:04 ibus-engine-sim
+ 4954 ? 00:00:00 gnome-session-b
+ 4969 ? 00:03:48 gnome-shell
+ 5008 ? 00:00:00 gnome-shell-cal
+ 5012 ? 00:00:00 evolution-sourc
+ 5025 ? 00:00:00 gjs
+ 5037 ? 00:00:00 gvfsd-trash
+ 5050 ? 00:00:00 gsd-a11y-settin
+ 5051 ? 00:00:00 gsd-color
+ 5052 ? 00:00:00 gsd-datetime
+ 5055 ? 00:00:00 gsd-housekeepin
+ 5056 ? 00:00:00 gsd-keyboard
+ 5058 ? 00:00:00 gsd-media-keys
+ 5059 ? 00:00:00 gsd-power
+ 5060 ? 00:00:00 gsd-print-notif 5061 ? 00:00:00 gsd-rfkill
+ 5066 ? 00:00:00 gsd-screensaver
+ 5067 ? 00:00:01 gsd-sharing
+ 5073 ? 00:00:00 gsd-smartcard
+ 5075 ? 00:00:00 gsd-sound
+ 5077 ? 00:00:00 gsd-usb-protect
+ 5078 ? 00:00:00 gsd-wacom
+ 5080 ? 00:00:00 gsd-wwan
+ 5085 ? 00:00:00 gsd-xsettings
+ 5093 ? 00:00:00 evolution-calen
+ 5102 ? 00:00:00 gsd-disk-utilit
+ 5112 ? 00:00:00 evolution-alarm
+ 5168 ? 00:00:00 colord
+ 5196 ? 00:00:00 gsd-printer
+ 5229 ? 00:00:00 evolution-addre
+ 5274 ? 00:00:00 gvfsd-metadata
+ 5307 ? 00:00:00 gnome-calendar
+ 5312 ? 00:00:31 gnome-terminal-
+ 5399 pts/0 00:00:00 bash
+ 5406 ? 00:00:00 xdg-desktop-por
+ 5428 ? 00:00:03 snapd
+ 5590 ? 00:00:00 loop2
+ 5692 ? 00:00:00 loop3
+ 5792 ? 00:00:00 loop4
+ 5891 ? 00:00:00 loop5
+ 6066 ? 00:00:00 update-notifier
+ 6253 ? 00:00:04 kworker/u16:0-events_unbound 6550 ? 00:00:07 nautilus
+ 6602 ? 00:04:38 MainThread
+ 6686 ? 00:00:07 Privileged Cont
+ 6698 ? 00:00:02 WebExtensions
+ 6872 ? 00:01:25 Web Content
+ 6905 ? 00:00:03 Web Content
+ 7342 ? 00:00:00 oosplash
+ 7358 ? 00:02:13 soffice.bin
+ 7885 ? 00:03:47 Web Content
+ 7927 ? 00:00:00 kworker/1:0-events
+ 7937 ? 00:00:00 kworker/5:0-mm_percpu_wq
+ 8563 pts/0 00:00:00 cat
+ 9036 ? 00:00:03 kworker/6:1-events
+ 9083 ? 00:00:12 RDD Process
+ 9095 ? 00:00:00 kworker/0:1-events
+ 9114 ? 00:00:00 Web Content
+ 9317 ? 00:00:01 kworker/u16:2-i915
+ 9438 ? 00:00:35 gnome-control-c
+ 9497 ? 00:00:00 kworker/2:0-events
+ 9498 ? 00:00:00 kworker/3:1-events
+ 9638 ? 00:00:00 kworker/7:0-events
+ 9643 ? 00:00:00 kworker/6:2-events
+ 9649 ? 00:00:00 kworker/4:2-events
+ 9839 ? 00:00:00 kworker/7:2-events
+ 9873 ? 00:00:00 kworker/0:2-events
+ 9887 ? 00:00:00 kworker/3:2-events
+ 9973 ? 00:00:00 kworker/4:1-events 9982 ? 00:00:00 kworker/5:1-events
+ 9987 ? 00:00:00 kworker/1:1-events
+ 10109 ? 00:00:00 kworker/u16:3-events_unbound
+ 10146 ? 00:00:00 kworker/7:1-events
+ 10225 ? 00:00:00 kworker/0:0-events
+ 10285 ? 00:00:00 kworker/1:2-events
+ 10287 ? 00:00:00 kworker/6:0
+ 10305 ? 00:00:00 kworker/4:0-events
+ 10318 ? 00:00:00 kworker/3:0-events
+ 10340 pts/0 00:00:00 ps
+ubuntu@ubuntu:~$ ps -d
+ PID TTY TIME CMD
+ 2 ? 00:00:00 kthreadd
+ 3 ? 00:00:00 rcu_gp
+ 4 ? 00:00:00 rcu_par_gp
+ 6 ? 00:00:00 kworker/0:0H-kblockd
+ 9 ? 00:00:00 mm_percpu_wq
+ 10 ? 00:00:00 ksoftirqd/0
+ 11 ? 00:00:03 rcu_sched
+ 12 ? 00:00:00 migration/0
+ 13 ? 00:00:00 idle_inject/0
+ 14 ? 00:00:00 cpuhp/0
+ 15 ? 00:00:00 cpuhp/1
+ 16 ? 00:00:00 idle_inject/1
+ 17 ? 00:00:01 migration/1
+ 18 ? 00:00:00 ksoftirqd/1
+ 20 ? 00:00:00 kworker/1:0H-kblockd 21 ? 00:00:00 cpuhp/2
+ 22 ? 00:00:00 idle_inject/2
+ 23 ? 00:00:01 migration/2
+ 24 ? 00:00:00 ksoftirqd/2
+ 26 ? 00:00:00 kworker/2:0H-kblockd
+ 27 ? 00:00:00 cpuhp/3
+ 28 ? 00:00:00 idle_inject/3
+ 29 ? 00:00:01 migration/3
+ 30 ? 00:00:00 ksoftirqd/3
+ 32 ? 00:00:00 kworker/3:0H-kblockd
+ 33 ? 00:00:00 cpuhp/4
+ 34 ? 00:00:00 idle_inject/4
+ 35 ? 00:00:01 migration/4
+ 36 ? 00:00:00 ksoftirqd/4
+ 38 ? 00:00:00 kworker/4:0H-events_highpri
+ 39 ? 00:00:00 cpuhp/5
+ 40 ? 00:00:00 idle_inject/5
+ 41 ? 00:00:01 migration/5
+ 42 ? 00:00:00 ksoftirqd/5
+ 44 ? 00:00:00 kworker/5:0H-events_highpri
+ 45 ? 00:00:00 cpuhp/6
+ 46 ? 00:00:00 idle_inject/6
+ 47 ? 00:00:01 migration/6
+ 48 ? 00:00:00 ksoftirqd/6
+ 50 ? 00:00:00 kworker/6:0H-events_highpri
+ 51 ? 00:00:00 cpuhp/7
+ 52 ? 00:00:00 idle_inject/7 53 ? 00:00:01 migration/7
+ 54 ? 00:00:00 ksoftirqd/7
+ 56 ? 00:00:00 kworker/7:0H-events_highpri
+ 57 ? 00:00:00 kdevtmpfs
+ 58 ? 00:00:00 netns
+ 59 ? 00:00:00 rcu_tasks_kthre
+ 60 ? 00:00:00 kauditd
+ 63 ? 00:00:00 khungtaskd
+ 64 ? 00:00:00 oom_reaper
+ 65 ? 00:00:00 writeback
+ 66 ? 00:00:00 kcompactd0
+ 67 ? 00:00:00 ksmd
+ 68 ? 00:00:00 khugepaged
+ 163 ? 00:00:00 kintegrityd
+ 164 ? 00:00:00 kblockd
+ 165 ? 00:00:00 blkcg_punt_bio
+ 166 ? 00:00:00 tpm_dev_wq
+ 167 ? 00:00:00 ata_sff
+ 168 ? 00:00:00 md
+ 169 ? 00:00:00 edac-poller
+ 170 ? 00:00:00 devfreq_wq
+ 171 ? 00:00:00 watchdogd
+ 176 ? 00:00:00 kswapd0
+ 177 ? 00:00:00 ecryptfs-kthrea
+ 180 ? 00:00:00 kthrotld
+ 181 ? 00:00:00 irq/123-aerdrv
+ 182 ? 00:00:00 irq/123-pcie-dp 183 ? 00:00:00 irq/124-aerdrv
+ 184 ? 00:00:00 irq/124-pcie-dp
+ 185 ? 00:00:00 acpi_thermal_pm
+ 187 ? 00:00:00 vfio-irqfd-clea
+ 189 ? 00:00:00 kworker/2:2-events
+ 192 ? 00:00:00 ipv6_addrconf
+ 203 ? 00:00:00 kstrp
+ 207 ? 00:00:00 kworker/u17:0-rb_allocator
+ 226 ? 00:00:00 charger_manager
+ 284 ? 00:00:00 nvme-wq
+ 285 ? 00:00:00 nvme-reset-wq
+ 286 ? 00:00:00 nvme-delete-wq
+ 287 ? 00:00:00 scsi_eh_0
+ 288 ? 00:00:00 scsi_tmf_0
+ 289 ? 00:00:00 cryptd
+ 290 ? 00:00:00 scsi_eh_1
+ 291 ? 00:00:00 scsi_tmf_1
+ 292 ? 00:00:00 scsi_eh_2
+ 297 ? 00:00:00 scsi_tmf_2
+ 302 ? 00:00:00 scsi_eh_3
+ 303 ? 00:00:00 scsi_tmf_3
+ 304 ? 00:00:00 scsi_eh_4
+ 305 ? 00:00:00 scsi_tmf_4
+ 306 ? 00:00:00 scsi_eh_5
+ 307 ? 00:00:00 scsi_tmf_5
+ 312 ? 00:00:00 scsi_eh_6
+ 314 ? 00:00:00 scsi_tmf_6 316 ? 00:00:00 scsi_eh_7
+ 317 ? 00:00:00 scsi_tmf_7
+ 319 ? 00:00:00 scsi_eh_8
+ 321 ? 00:00:00 scsi_tmf_8
+ 322 ? 00:00:00 scsi_eh_9
+ 323 ? 00:00:00 scsi_tmf_9
+ 324 ? 00:00:00 scsi_eh_10
+ 331 ? 00:00:00 scsi_tmf_10
+ 332 ? 00:00:00 scsi_eh_11
+ 333 ? 00:00:00 scsi_tmf_11
+ 334 ? 00:00:00 scsi_eh_12
+ 335 ? 00:00:00 scsi_tmf_12
+ 336 ? 00:00:00 scsi_eh_13
+ 337 ? 00:00:00 scsi_tmf_13
+ 338 ? 00:00:00 scsi_eh_14
+ 339 ? 00:00:00 scsi_tmf_14
+ 340 ? 00:00:00 scsi_eh_15
+ 341 ? 00:00:00 scsi_tmf_15
+ 379 ? 00:00:00 nvkm-disp
+ 381 ? 00:00:00 kworker/7:1H
+ 383 ? 00:00:00 irq/109-SYNA7DB
+ 384 ? 00:00:00 ttm_swap
+ 385 ? 00:00:00 scsi_eh_16
+ 386 ? 00:00:00 scsi_tmf_16
+ 387 ? 00:00:04 usb-storage
+ 389 ? 00:00:00 uas
+ 396 ? 00:00:00 kworker/5:1H-events_highpri 404 ? 00:00:00 kworker/4:1H-events_highpri
+ 418 ? 00:00:00 kworker/6:1H-events_highpri
+ 496 ? 00:00:00 kworker/1:1H-events_highpri
+ 607 ? 00:00:00 kworker/0:1H-events_highpri
+ 624 ? 00:00:00 kworker/3:1H-events_highpri
+ 627 ? 00:00:00 kworker/2:1H-events_highpri
+ 658 ? 00:00:01 loop0
+ 1335 ? 00:00:00 irq/138-mei_me
+ 1353 ? 00:00:00 cfg80211
+ 1363 ? 00:00:01 irq/139-iwlwifi
+ 1365 ? 00:00:00 irq/140-iwlwifi
+ 1366 ? 00:00:00 irq/141-iwlwifi
+ 1367 ? 00:00:00 irq/142-iwlwifi
+ 1368 ? 00:00:00 irq/143-iwlwifi
+ 1369 ? 00:00:00 irq/144-iwlwifi
+ 1370 ? 00:00:00 irq/145-iwlwifi
+ 1371 ? 00:00:00 irq/146-iwlwifi
+ 1372 ? 00:00:00 irq/147-iwlwifi
+ 1373 ? 00:00:00 irq/148-iwlwifi
+ 1404 ? 00:00:00 kmemstick
+ 1412 ? 00:00:00 kworker/u17:3-rb_allocator
+ 1459 ? 00:00:00 irq/149-AudioHD
+ 1460 ? 00:00:00 irq/149-AudioDS
+ 1491 ? 00:00:00 spl_system_task
+ 1492 ? 00:00:00 spl_delay_taskq
+ 1493 ? 00:00:00 spl_dynamic_tas
+ 1494 ? 00:00:00 spl_kmem_cache 1495 ? 00:00:00 zvol
+ 1496 ? 00:00:00 arc_prune
+ 1497 ? 00:00:00 zthr_procedure
+ 1498 ? 00:00:00 zthr_procedure
+ 1499 ? 00:00:00 dbu_evict
+ 1500 ? 00:00:00 dbuf_evict
+ 1501 ? 00:00:00 z_vdev_file
+ 1502 ? 00:00:00 l2arc_feed
+ 1588 ? 00:00:00 avahi-daemon
+ 1772 ? 00:00:00 (sd-pam)
+ 1792 ? 00:00:00 dconf-service
+ 1833 ? 00:00:00 gvfsd-fuse
+ 1878 ? 00:00:00 goa-daemon
+ 1931 ? 00:00:00 dbus-daemon
+ 1973 ? 00:00:00 goa-identity-se
+ 1996 ? 00:00:00 krfcommd
+ 2273 ? 00:00:00 gnome-keyring-d
+ 2691 ? 00:00:00 loop1
+ 4748 ? 00:00:00 gdm-session-wor
+ 4756 tty2 00:04:42 Xorg
+ 4777 tty2 00:00:00 gnome-session-b
+ 4870 ? 00:00:00 ibus-dconf
+ 4871 ? 00:00:00 ibus-ui-gtk3
+ 4874 ? 00:00:03 ibus-extension-
+ 4876 ? 00:00:00 ibus-x11
+ 4880 ? 00:00:00 ibus-portal
+ 4906 ? 00:00:02 at-spi2-registr 4936 ? 00:00:04 ibus-engine-sim
+ 5008 ? 00:00:00 gnome-shell-cal
+ 5025 ? 00:00:00 gjs
+ 5037 ? 00:00:00 gvfsd-trash
+ 5102 ? 00:00:00 gsd-disk-utilit
+ 5112 ? 00:00:00 evolution-alarm
+ 5196 ? 00:00:00 gsd-printer
+ 5307 ? 00:00:00 gnome-calendar
+ 5590 ? 00:00:00 loop2
+ 5692 ? 00:00:00 loop3
+ 5792 ? 00:00:00 loop4
+ 5891 ? 00:00:00 loop5
+ 6066 ? 00:00:00 update-notifier
+ 6253 ? 00:00:04 kworker/u16:0-i915
+ 6550 ? 00:00:07 nautilus
+ 6602 ? 00:04:39 MainThread
+ 6686 ? 00:00:07 Privileged Cont
+ 6698 ? 00:00:02 WebExtensions
+ 6872 ? 00:01:25 Web Content
+ 6905 ? 00:00:03 Web Content
+ 7342 ? 00:00:00 oosplash
+ 7358 ? 00:02:13 soffice.bin
+ 7885 ? 00:03:48 Web Content
+ 7927 ? 00:00:00 kworker/1:0-events
+ 7937 ? 00:00:00 kworker/5:0-mm_percpu_wq
+ 8563 pts/0 00:00:00 cat
+ 9036 ? 00:00:03 kworker/6:1-events 9083 ? 00:00:12 RDD Process
+ 9095 ? 00:00:00 kworker/0:1-events
+ 9114 ? 00:00:00 Web Content
+ 9317 ? 00:00:01 kworker/u16:2-i915
+ 9438 ? 00:00:35 gnome-control-c
+ 9497 ? 00:00:00 kworker/2:0-events
+ 9498 ? 00:00:00 kworker/3:1-events
+ 9638 ? 00:00:00 kworker/7:0-events
+ 9643 ? 00:00:00 kworker/6:2-events
+ 9649 ? 00:00:00 kworker/4:2-events
+ 9873 ? 00:00:00 kworker/0:2-events
+ 9887 ? 00:00:00 kworker/3:2-events
+ 9973 ? 00:00:00 kworker/4:1-events
+ 9982 ? 00:00:00 kworker/5:1-events
+ 9987 ? 00:00:00 kworker/1:1-events
+ 10109 ? 00:00:00 kworker/u16:3-events_unbound
+ 10146 ? 00:00:00 kworker/7:1-events
+ 10225 ? 00:00:00 kworker/0:0-events
+ 10285 ? 00:00:00 kworker/1:2-events
+ 10287 ? 00:00:00 kworker/6:0
+ 10305 ? 00:00:00 kworker/4:0-mm_percpu_wq
+ 10318 ? 00:00:00 kworker/3:0-events
+ 10349 pts/0 00:00:00 ps
+ubuntu@ubuntu:~$ pd -r
+pd: command not found
+ubuntu@ubuntu:~$ ps -r
+ PID TTY STAT TIME COMMAND 4756 tty2 Rl+ 4:43 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/us
+ 10372 pts/0 R+ 0:00 ps -r
+18. pipe:
+A pipe is a form of redirection (transfer of standard output to some other 
+destination) that is used in Linux and other Unix-like operating systems to send 
+the output of one command/program/process to another 
+command/program/process for further processing. The Unix/Linux systems
+allow stdout of a command to be connected to stdin of another command. You 
+can make it do so by using the pipe character ‘|’.
+Output:
+ubuntu@ubuntu:~$ ls -l | more
+total 0
+drwxr-xr-x 2 ubuntu ubuntu 100 Feb 24 14:52 Desktop
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Documents
+drwxr-xr-x 2 ubuntu ubuntu 80 Feb 24 14:15 Downloads
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Music
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Pictures
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Public
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Templates
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Videos
+19. Redirection Operators:
+1. >:
+The '>' symbol is used for output (STDOUT) redirection.
+2. <:The '<' symbol is used for input(STDIN) redirection.
+Output:
+ubuntu@ubuntu:~$ ls -l > new.txt
+ubuntu@ubuntu:~$ cat new.txt 
+total 0
+drwxr-xr-x 2 ubuntu ubuntu 100 Feb 24 14:52 Desktop
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Documents
+drwxr-xr-x 2 ubuntu ubuntu 80 Feb 24 14:15 Downloads
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Music
+-rw-rw-r-- 1 ubuntu ubuntu 0 Feb 24 15:15 new.txt
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Pictures
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Public
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Templates
+drwxr-xr-x 2 ubuntu ubuntu 40 Feb 24 14:02 Videos
+20. 
+1. Display top 10 processes in descending order.
+ubuntu@ubuntu:~$ ps -aux --sort pid
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME 
+COMMAND
+root 10287 0.0 0.0 0 0 ? I 15:08 0:00 [kworker/6:
+root 10305 0.0 0.0 0 0 ? I 15:09 0:00 [kworker/4:
+root 10318 0.0 0.0 0 0 ? I 15:10 0:00 [kworker/3:
+root 10350 0.0 0.0 0 0 ? I 15:11 0:00 [kworker/7:
+root 10384 0.0 0.0 0 0 ? I 15:12 0:00 [kworker/2:
+root 10445 0.0 0.0 0 0 ? I 15:15 0:00 [kworker/0:
+root 10446 0.0 0.0 0 0 ? I 15:15 0:00 [kworker/4:
+root 10488 0.1 0.0 0 0 ? I 15:16 0:00 [kworker/u1root 10489 0.0 0.0 0 0 ? I 15:16 0:00 [kworker/7:
+ubuntu 10493 1.0 0.0 20792 4068 pts/0 R+ 15:17 0:00 ps -aux --s
+2. Display the process with highest memory usage.
+ubuntu@ubuntu:~$ ps -aux --sort %mem
+USER PID %CPU %MEM VSZ RSS TTY STAT START 
+TIME COMMAND
+root 2 0.0 0.0 0 0 ? S 13:59 0:00 [kthreadd]
+root 3 0.0 0.0 0 0 ? I< 13:59 0:00 [rcu_gp]
+root 4 0.0 0.0 0 0 ? I< 13:59 0:00 [rcu_par_gp
+root 6 0.0 0.0 0 0 ? I< 13:59 0:00 [kworker/0:
+root 9 0.0 0.0 0 0 ? I< 13:59 0:00 [mm_percpu_
+root 10 0.0 0.0 0 0 ? S 13:59 0:00 [ksoftirqd/
+root 11 0.0 0.0 0 0 ? I 13:59 0:03 [rcu_sched]
+root 12 0.0 0.0 0 0 ? S 13:59 0:00 [migration/
+root 13 0.0 0.0 0 0 ? S 13:59 0:00 [idle_injec
+root 14 0.0 0.0 0 0 ? S 13:59 0:00 [cpuhp/0]
+3. Display current user logged in and logname.
+ubuntu@ubuntu:~$ whoami
+ubuntu
+4. Display current shell, home directory, operating system type, current 
+path setting, current working directory
+ubuntu@ubuntu:~$ ps -p $$
+ PID TTY TIME CMD 5399 pts/0 00:00:00 bash
+5. Display OS version, release number, kernel version.
+ubuntu@ubuntu:~$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description: Ubuntu 20.04.1 LTS
+Release: 20.04
+Codename: focal
+ubuntu@ubuntu:~$ uname -a
+Linux ubuntu 5.4.0-42-generic #46-Ubuntu SMP Fri Jul 10 00:24:02 UTC 2020 
+x86_64 x86_64 x86_64 GNU/Linux
