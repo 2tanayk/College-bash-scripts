@@ -1,0 +1,92 @@
+import java.util.*;
+
+public class Driver {
+    private static final Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        boolean flag = true;
+
+        do {
+            System.out.println("Enter the disk scheduling algorithm:\n1)FCFS\n2)SSTF\n3)Exit");
+            int ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    fcfsDiskScheduling();
+                    break;
+                case 2:
+                    sstfDiskScheduling();
+                    break;
+                case 3:
+                    flag = false;
+                    break;
+            }
+        } while (flag);
+    }
+
+    private static void fcfsDiskScheduling() {
+        System.out.println("Enter the initial position of the read/write head:");
+        int iPos = sc.nextInt();
+
+        System.out.println("Enter the total no. of disk locations:");
+        int n = sc.nextInt();
+        int[] p = new int[n];
+        int[] seekTime = new int[n];
+        System.out.println("Enter the values of disk locations in order:");
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt();
+        }
+        seekTime[0] = Math.abs(iPos - p[0]);
+        int tSeekTime = seekTime[0];
+        for (int i = 0; i < n - 1; i++) {
+            System.out.println("Disk Location " + (i + 1) + ":" + seekTime[i]);
+            seekTime[i + 1] = Math.abs(p[i] - p[i + 1]);
+            tSeekTime += seekTime[i + 1];
+        }
+        System.out.println("Disk Location " + n + ":" + seekTime[n - 1]);
+        System.out.println("\nTotal seek time:" + tSeekTime);
+    }
+
+    private static void sstfDiskScheduling() {
+        System.out.println("Enter the initial position of the read/write head:");
+        int iPos = sc.nextInt();
+
+        System.out.println("Enter the total no. of disk locations:");
+        int n = sc.nextInt();
+        int[] seekTime = new int[n];
+        ArrayList<Integer> p = new ArrayList<>();
+        int sstfMin = Integer.MAX_VALUE;
+        int sstfMinHelper = Integer.MAX_VALUE;
+        System.out.println("Enter the values of disk locations in order:");
+        for (int i = 0; i < n; i++) {
+            p.add(sc.nextInt());
+            int temp = Math.abs(p.get(i) - iPos);
+            if (sstfMinHelper > temp) {
+                sstfMinHelper = temp;
+                sstfMin = p.get(i);
+            }
+        }
+        p.remove(Integer.valueOf(sstfMin));
+        seekTime[0] = Math.abs(sstfMin - iPos);
+        int tSeekTime = seekTime[0];
+        for (int i = 0; i < p.size(); i++) {
+            int sstfMinTemp = sstfMin;
+            sstfMin = Integer.MAX_VALUE;
+            sstfMinHelper = Integer.MAX_VALUE;
+            for (Integer integer : p) {
+                int temp = Math.abs(sstfMinTemp - integer);
+                if (sstfMinHelper > temp) {
+                    sstfMinHelper = temp;
+                    sstfMin = integer;
+                }
+            }
+            seekTime[i + 1] = Math.abs(sstfMin - sstfMinTemp);
+            tSeekTime += seekTime[i + 1];
+            p.set(p.indexOf(sstfMin), Integer.MAX_VALUE);
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Disk Location " + (i + 1) + ":" + seekTime[i]);
+        }
+        System.out.println("\nTotal seek time:" + tSeekTime);
+    }
+}
